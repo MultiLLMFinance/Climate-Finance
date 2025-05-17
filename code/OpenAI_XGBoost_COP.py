@@ -1,0 +1,608 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from datetime import datetime
+import os
+import json
+import warnings
+from sklearn.metrics import accuracy_score, roc_auc_score
+from sklearn.model_selection import GridSearchCV
+from sklearn.base import clone
+import xgboost as xgb
+warnings.filterwarnings('ignore')
+
+class EmbeddingStockPredictor:
+    """
+    Stock market trend prediction model using OpenAI embeddings
+    """
+    def __init__(self, csv_path):
+        """
+        Initialize the stock predictor using OpenAI embeddings.
+        
+        Args:
+            csv_path: Path to the CSV file containing news data with pre-computed embeddings
+        """
+        self.csv_path = csv_path
+        self.data = None
+        self.layers = []
+        self.results = {}
+        
+    def load_data(self):
+        """
+        Load and preprocess the CSV data containing news and embedding vectors.
+        """
+        self.data = pd.read_csv(self.csv_path)
+        
+        # Convert date strings to datetime objects with flexible formatting
+        try:
+            # Try pandas' automatic date parsing first
+            self.data['Publication date'] = pd.to_datetime(self.data['Publication date'], dayfirst=True)
+            self.data['Predicting date Short'] = pd.to_datetime(self.data['Predicting date Short'], dayfirst=True)
+            self.data['Predicting date Long'] = pd.to_datetime(self.data['Predicting date Long'], dayfirst=True)
+        except (ValueError, TypeError):
+            # If automatic parsing fails, try manual approach
+            print("Automatic date parsing failed. Trying manual conversion...")
+            
+            # Helper function to handle different date formats
+            def parse_date_column(column):
+                result = []
+                for date_str in column:
+                    try:
+                        # Try to parse as YYYY-MM-DD
+                        date = pd.to_datetime(date_str, format='%Y-%m-%d')
+                    except ValueError:
+                        try:
+                            # Try to parse as DD/MM/YYYY
+                            date = pd.to_datetime(date_str, format='%d/%m/%Y')
+                        except ValueError:
+                            # As a last resort, let pandas guess
+                            date = pd.to_datetime(date_str, dayfirst=True)
+                    result.append(date)
+                return pd.Series(result)
+            
+            self.data['Publication date'] = parse_date_column(self.data['Publication date'])
+            self.data['Predicting date Short'] = parse_date_column(self.data['Predicting date Short'])
+            self.data['Predicting date Long'] = parse_date_column(self.data['Predicting date Long'])
+        
+        # Parse embedding vectors from string to numpy arrays
+        self.process_embedding_vectors()
+        
+        # Sort by publication date
+        self.data = self.data.sort_values('Publication date')
+        
+        print(f"Loaded {len(self.data)} news articles spanning from "
+              f"{self.data['Publication date'].min().strftime('%d/%m/%Y')} "
+              f"to {self.data['Publication date'].max().strftime('%d/%m/%Y')}")
+        print(f"Class distribution for short-term prediction: {self.data['S_label'].value_counts().to_dict()}")
+        print(f"Class distribution for long-term prediction: {self.data['L_label'].value_counts().to_dict()}")
+        
+        return self
+    
+    def process_embedding_vectors(self):
+        """
+        Convert the embedding vector strings to numpy arrays.
+        """
+        # Function to convert string representation of vector to numpy array
+        def parse_vector(vector_str):
+            if pd.isna(vector_str):
+                # Return zeros array if missing
+                return np.zeros(1536)
+            
+            try:
+                # Try parsing as JSON
+                return np.array(json.loads(vector_str))
+            except (json.JSONDecodeError, TypeError):
+                # If not JSON, try parsing as string representation of array
+                try:
+                    # Remove brackets and split by commas
+                    vector_str = vector_str.strip('[]')
+                    return np.array([float(x) for x in vector_str.split(',')])
+                except:
+                    print(f"Could not parse embedding vector: {vector_str[:100]}...")
+                    return np.zeros(1536)
+        
+        # Process title embeddings
+        if 'Title_embedding_vector' in self.data.columns:
+            print("Processing title embedding vectors...")
+            self.data['Title_embedding'] = self.data['Title_embedding_vector'].apply(parse_vector)
+            # Verify dimensions
+            sample_dim = len(self.data['Title_embedding'].iloc[0])
+            print(f"Title embedding dimension: {sample_dim}")
+        else:
+            print("Warning: Title embedding vectors not found in dataset")
+            
+        # Process full text embeddings
+        if 'Full_text_embedding_vector' in self.data.columns:
+            print("Processing full text embedding vectors...")
+            self.data['Full_text_embedding'] = self.data['Full_text_embedding_vector'].apply(parse_vector)
+            # Verify dimensions
+            sample_dim = len(self.data['Full_text_embedding'].iloc[0])
+            print(f"Full text embedding dimension: {sample_dim}")
+        else:
+            print("Warning: Full text embedding vectors not found in dataset")
+            
+        return self
+    
+    def define_time_windows(self):
+        """Define the time windows for the sliding window approach."""
+        # First layer: train (2019-2021), validation (2021-2021), test (2022-2022)
+        layer1 = {
+            'train_start': pd.Timestamp('2019-01-01'),
+            'train_end': pd.Timestamp('2021-05-31'),
+            'val_start': pd.Timestamp('2021-06-01'),
+            'val_end': pd.Timestamp('2021-12-31'),
+            'test_start': pd.Timestamp('2022-01-01'),
+            'test_end': pd.Timestamp('2022-05-31')
+        }
+        
+        # Second layer: train (2019-2021), validation (2022-2022), test (2022-2022)
+        layer2 = {
+            'train_start': pd.Timestamp('2019-01-01'),
+            'train_end': pd.Timestamp('2021-12-31'),
+            'val_start': pd.Timestamp('2022-01-01'),
+            'val_end': pd.Timestamp('2022-05-31'),
+            'test_start': pd.Timestamp('2022-06-01'),
+            'test_end': pd.Timestamp('2022-12-31')
+        }
+        
+        # Third layer: train (2019-2022), validation (2022-2022), test (2023-2023)
+        layer3 = {
+            'train_start': pd.Timestamp('2019-01-01'),
+            'train_end': pd.Timestamp('2022-05-31'),
+            'val_start': pd.Timestamp('2022-06-01'),
+            'val_end': pd.Timestamp('2022-12-31'),
+            'test_start': pd.Timestamp('2023-01-01'),
+            'test_end': pd.Timestamp('2023-05-31')
+        }
+        
+        self.layers = [layer1, layer2, layer3]
+        return self
+    
+    def split_data(self, layer, embedding_col, label_col):
+        """
+        Split the data into training, validation, and test sets based on the defined time windows.
+        
+        Args:
+            layer: The time window layer
+            embedding_col: The column containing the embedding vectors ('Title_embedding' or 'Full_text_embedding')
+            label_col: The column containing the labels ('S_label' or 'L_label')
+            
+        Returns:
+            (X_train, y_train), (X_val, y_val), (X_test, y_test), train_data, val_data, test_data
+        """
+        train_mask = (self.data['Publication date'] >= layer['train_start']) & (self.data['Publication date'] <= layer['train_end'])
+        val_mask = (self.data['Publication date'] > layer['val_start']) & (self.data['Publication date'] <= layer['val_end'])
+        test_mask = (self.data['Publication date'] > layer['test_start']) & (self.data['Publication date'] <= layer['test_end'])
+        
+        train_data = self.data[train_mask]
+        val_data = self.data[val_mask]
+        test_data = self.data[test_mask]
+        
+        print(f"Training data: {len(train_data)} samples")
+        print(f"Validation data: {len(val_data)} samples")
+        print(f"Test data: {len(test_data)} samples")
+        
+        # Extract embedding vectors and convert to numpy arrays
+        X_train = np.stack(train_data[embedding_col].values)
+        X_val = np.stack(val_data[embedding_col].values)
+        X_test = np.stack(test_data[embedding_col].values)
+        
+        y_train = train_data[label_col]
+        y_val = val_data[label_col]
+        y_test = test_data[label_col]
+        
+        return (X_train, y_train), (X_val, y_val), (X_test, y_test), train_data, val_data, test_data
+    
+    def create_stage1_model(self):
+        """
+        Create the first stage XGBoost model with core parameters.
+        """
+        # Define base model with default parameters
+        model = xgb.XGBClassifier(
+            objective='binary:logistic',
+            eval_metric='auc',
+            use_label_encoder=False,
+            random_state=42
+        )
+        
+        # Define parameter grid for first stage optimization
+        param_grid = {
+            'n_estimators': [80, 150],            # More trees needed for complex embedding patterns
+            'max_depth': [3, 5],                     # Wider range to capture embedding relationships
+            'learning_rate': [0.0001, 0.001, 0.01],         # Standard range for gradient boosting
+            'min_child_weight': [1, 3],              # Include lower values to allow more flexible splits
+            'subsample': [0.7, 0.8],               # Less aggressive subsampling for dense features
+            'colsample_bytree': [0.7, 0.8]         # Test more feature inclusion options
+        }
+        
+        # Create grid search model
+        grid_search = GridSearchCV(
+            model,
+            param_grid,
+            cv=3,                # 3-fold cross-validation
+            scoring='roc_auc',   # Optimize for ROC AUC
+            verbose=1,
+            n_jobs=-1            # Use all available cores
+        )
+        
+        return grid_search
+    
+    def create_stage2_model(self, best_params):
+        """
+        Create the second stage XGBoost model with regularization parameters.
+        
+        Args:
+            best_params: Best parameters from the first stage
+        """
+        # Extract best core parameters from first stage
+        n_estimators = best_params.get('n_estimators', 80)
+        max_depth = best_params.get('max_depth', 3)
+        learning_rate = best_params.get('learning_rate', 0.0001)
+        min_child_weight = best_params.get('min_child_weight', 3)
+        subsample = best_params.get('subsample', 0.7)
+        colsample_bytree = best_params.get('colsample_bytree', 0.7)
+        
+        # Create base model with best parameters from first stage
+        model = xgb.XGBClassifier(
+            n_estimators=n_estimators,
+            max_depth=max_depth,
+            learning_rate=learning_rate,
+            min_child_weight=min_child_weight,
+            subsample=subsample,
+            colsample_bytree=colsample_bytree,
+            objective='binary:logistic',
+            eval_metric='auc',
+            use_label_encoder=False,
+            random_state=42
+        )
+        
+        # Define parameters for the second stage grid search
+        param_grid = {
+            'gamma': [0, 0.1, 0.3],           # Control split threshold
+            'reg_alpha': [0, 0.1, 1.0],       # L1 regularization
+            'reg_lambda': [1.0, 5.0, 10.0]    # L2 regularization (increased for dense vectors)
+        }
+        
+        # Create grid search model
+        grid_search = GridSearchCV(
+            model,
+            param_grid,
+            cv=3,
+            scoring='roc_auc',
+            verbose=1,
+            n_jobs=-1
+        )
+        
+        return grid_search
+    
+    def train_and_evaluate(self, embedding_source, label_col):
+        """
+        Train and evaluate the model for a specific embedding source and label column.
+        
+        Args:
+            embedding_source: The embedding source to use ('Title' or 'Full text')
+            label_col: The label column to use ('S_label' or 'L_label')
+        """
+        embedding_col = f"{embedding_source}_embedding"
+        
+        # Store results
+        combination_key = f"{embedding_source}|{label_col}"
+        self.results[combination_key] = {
+            'accuracy': [],
+            'auc': [],
+            'best_params_stage1': [],
+            'best_params_stage2': [],
+            'layer_results': []
+        }
+        
+        print(f"\n{'='*80}")
+        print(f"Training XGBoost model for {embedding_source} embeddings and {label_col}")
+        print(f"{'='*80}")
+        
+        for i, layer in enumerate(self.layers):
+            print(f"\nLayer {i+1}:")
+            print(f"Training period: {layer['train_start'].strftime('%d/%m/%Y')} - {layer['train_end'].strftime('%d/%m/%Y')}")
+            print(f"Validation period: {layer['val_start'].strftime('%d/%m/%Y')} - {layer['val_end'].strftime('%d/%m/%Y')}")
+            print(f"Testing period: {layer['test_start'].strftime('%d/%m/%Y')} - {layer['test_end'].strftime('%d/%m/%Y')}")
+            
+            # Split data
+            (X_train, y_train), (X_val, y_val), (X_test, y_test), train_data, val_data, test_data = self.split_data(layer, embedding_col, label_col)
+            
+            # Check if there are enough samples and classes
+            if len(X_train) < 10 or len(np.unique(y_train)) < 2 or len(np.unique(y_val)) < 2 or len(np.unique(y_test)) < 2:
+                print(f"Skipping layer {i+1} due to insufficient data or class imbalance")
+                continue
+            
+            # Stage 1: Core parameters optimization
+            print(f"Stage 1: Tuning core parameters for {embedding_source} embeddings...")
+            model_stage1 = self.create_stage1_model()
+            model_stage1.fit(X_train, y_train)
+            
+            # Get best model and parameters from stage 1
+            best_model_stage1 = model_stage1.best_estimator_
+            best_params_stage1 = model_stage1.best_params_
+            
+            print(f"Best parameters from Stage 1: {best_params_stage1}")
+            self.results[combination_key]['best_params_stage1'].append(best_params_stage1)
+            
+            # Stage 2: Regularization parameters optimization
+            print(f"Stage 2: Fine-tuning regularization parameters for {embedding_source} embeddings...")
+            model_stage2 = self.create_stage2_model(best_params_stage1)
+            model_stage2.fit(X_train, y_train)
+            
+            # Get best model and parameters from stage 2
+            best_model = model_stage2.best_estimator_
+            best_params_stage2 = model_stage2.best_params_
+            
+            print(f"Best parameters from Stage 2: {best_params_stage2}")
+            self.results[combination_key]['best_params_stage2'].append(best_params_stage2)
+            
+            # Evaluate on test set
+            y_pred = best_model.predict(X_test)
+            y_pred_proba = best_model.predict_proba(X_test)[:, 1]  # Probability of class 1
+            
+            accuracy = accuracy_score(y_test, y_pred)
+            auc = roc_auc_score(y_test, y_pred_proba)
+            
+            self.results[combination_key]['accuracy'].append(accuracy)
+            self.results[combination_key]['auc'].append(auc)
+            
+            print(f"Test Accuracy for Layer {i+1}: {accuracy:.4f}")
+            print(f"Test AUC for Layer {i+1}: {auc:.4f}")
+            
+            # Store layer results for visualization
+            layer_result = {
+                'layer': i+1,
+                'model': best_model,
+                'train_data': train_data,
+                'val_data': val_data,
+                'test_data': test_data,
+                'X_train': X_train,
+                'y_train': y_train,
+                'X_val': X_val,
+                'y_val': y_val,
+                'X_test': X_test,
+                'y_test': y_test,
+                'y_pred': y_pred,
+                'y_pred_proba': y_pred_proba,
+                'accuracy': accuracy,
+                'auc': auc,
+                'best_params_stage1': best_params_stage1,
+                'best_params_stage2': best_params_stage2
+            }
+            
+            self.results[combination_key]['layer_results'].append(layer_result)
+            
+            # Create learning curve visualization
+            self.plot_learning_curves(layer_result, embedding_source, label_col, i+1)
+        
+        # Calculate average metrics
+        avg_accuracy = np.mean(self.results[combination_key]['accuracy']) if self.results[combination_key]['accuracy'] else 0
+        avg_auc = np.mean(self.results[combination_key]['auc']) if self.results[combination_key]['auc'] else 0
+        
+        print(f"\nAverage Test Accuracy across all layers: {avg_accuracy:.4f}")
+        print(f"Average Test AUC across all layers: {avg_auc:.4f}")
+        
+        self.results[combination_key]['avg_accuracy'] = avg_accuracy
+        self.results[combination_key]['avg_auc'] = avg_auc
+        
+        return self
+    
+    def plot_learning_curves(self, layer_result, embedding_source, label_col, layer_num):
+        """Plot learning curves to detect overfitting."""
+        plt.figure(figsize=(15, 10))
+        plt.suptitle(f"Learning Curves: {embedding_source} Embeddings + {label_col} (Layer {layer_num})", fontsize=16)
+        
+        X_train = layer_result['X_train']
+        y_train = layer_result['y_train']
+        
+        # Create different training set sizes
+        train_sizes = [0.2, 0.4, 0.6, 0.8, 1.0]
+        train_acc = []
+        val_acc = []
+        
+        for size in train_sizes:
+            # Get subset of training data
+            n_samples = int(len(X_train) * size)
+            indices = np.random.choice(len(X_train), n_samples, replace=False)
+            X_train_subset = X_train[indices]
+            y_train_subset = y_train.iloc[indices]
+            
+            # Train a new model (simplified version for learning curve)
+            params = {**layer_result['best_params_stage1'], **layer_result['best_params_stage2']}
+            model = xgb.XGBClassifier(
+                objective='binary:logistic',
+                eval_metric='auc',
+                use_label_encoder=False,
+                random_state=42,
+                **params
+            )
+            model.fit(X_train_subset, y_train_subset)
+            
+            # Evaluate on training and validation sets
+            y_train_pred = model.predict(X_train_subset)
+            y_val_pred = model.predict(layer_result['X_val'])
+            
+            train_acc.append(accuracy_score(y_train_subset, y_train_pred))
+            val_acc.append(accuracy_score(layer_result['y_val'], y_val_pred))
+        
+        # Plot with improved styling
+        plt.plot(train_sizes, train_acc, 'o-', label='Training Accuracy', color='blue')
+        plt.plot(train_sizes, val_acc, 'o-', label='Validation Accuracy', color='orange')
+        plt.title('Accuracy Learning Curve')
+        plt.xlabel('Training Set Size (%)')
+        plt.ylabel('Accuracy')
+        plt.legend(loc='lower right')
+        plt.grid(True, linestyle='--', alpha=0.7)
+        
+        plt.tight_layout(rect=[0, 0, 1, 0.95])
+        
+        # Create directory for visualizations if it doesn't exist
+        embedding_type = embedding_source.lower().replace(" ", "_")
+        viz_dir = f'Climate_news_second_database/OpenAI_XGBoost/visualizations_{embedding_type}/COP'
+        os.makedirs(viz_dir, exist_ok=True)
+        save_path = os.path.join(viz_dir, f"learning_curves_{embedding_source}_{label_col}_layer_{layer_num}.png")
+        plt.savefig(save_path)
+        print(f"Learning curves visualization saved as: {save_path}")
+        plt.close()
+    
+    def run_all_combinations(self):
+        """Run the analysis for all combinations of embedding sources and label columns."""
+        # Define all combinations
+        combinations = [
+            ('Title', 'S_label'),      # Title embeddings + short-term prediction
+            ('Title', 'L_label'),      # Title embeddings + long-term prediction
+            ('Full_text', 'S_label'),  # Full text embeddings + short-term prediction
+            ('Full_text', 'L_label')   # Full text embeddings + long-term prediction
+        ]
+        
+        # Run analysis for each combination
+        for embedding_source, label_col in combinations:
+            self.train_and_evaluate(embedding_source, label_col)
+        
+        # Print summary
+        print("\n" + "="*80)
+        print("SUMMARY OF RESULTS (COP)")
+        print("="*80)
+        
+        # Create a summary table for easier comparison
+        summary_data = []
+        
+        for combination, results in self.results.items():
+            embedding_source, label_col = combination.split('|')
+            avg_accuracy = results.get('avg_accuracy', 'N/A')
+            avg_auc = results.get('avg_auc', 'N/A')
+            
+            print(f"\nCombination: {embedding_source} embeddings + {label_col}")
+            print(f"Average Accuracy: {avg_accuracy:.4f}")
+            print(f"Average AUC: {avg_auc:.4f}")
+            
+            # Print layer-specific results
+            for i, accuracy in enumerate(results.get('accuracy', [])):
+                auc = results.get('auc', [])[i]
+                print(f"  Layer {i+1} - Accuracy: {accuracy:.4f}, AUC: {auc:.4f}")
+            
+            summary_data.append({
+                'Combination': f"{embedding_source} + {label_col}",
+                'Avg Accuracy': avg_accuracy,
+                'Avg AUC': avg_auc
+            })
+        
+        # Create summary visualization
+        self.create_summary_visualization(summary_data)
+        
+        return self
+    
+    def create_summary_visualization(self, summary_data):
+        """Create a summary visualization comparing all model combinations."""
+        if not summary_data:
+            print("No data available for summary visualization")
+            return
+        
+        # Create a DataFrame for easier plotting
+        df = pd.DataFrame(summary_data)
+        
+        # Convert string metrics to float for plotting
+        if not isinstance(df['Avg Accuracy'].iloc[0], float):
+            df['Avg Accuracy'] = df['Avg Accuracy'].astype(float)
+        if not isinstance(df['Avg AUC'].iloc[0], float):
+            df['Avg AUC'] = df['Avg AUC'].astype(float)
+        
+        # Create bar chart comparing all combinations
+        plt.figure(figsize=(12, 8))
+        
+        # Plot accuracy bars
+        x = np.arange(len(df))
+        width = 0.35
+        
+        plt.bar(x - width/2, df['Avg Accuracy'], width, label='Average Accuracy', color='skyblue')
+        plt.bar(x + width/2, df['Avg AUC'], width, label='Average AUC', color='salmon')
+        
+        plt.xlabel('Model Combination')
+        plt.ylabel('Score')
+        plt.title('Performance Comparison of Different Model Combinations')
+        plt.xticks(x, df['Combination'], rotation=0, ha='center')
+        plt.legend()
+        
+        # Add value labels on top of bars
+        for i, v in enumerate(df['Avg Accuracy']):
+            plt.text(i - width/2, v + 0.01, f"{v:.3f}", ha='center', va='bottom', fontsize=9)
+        
+        for i, v in enumerate(df['Avg AUC']):
+            plt.text(i + width/2, v + 0.01, f"{v:.3f}", ha='center', va='bottom', fontsize=9)
+        
+        plt.ylim(0, max(df['Avg Accuracy'].max(), df['Avg AUC'].max()) + 0.1)
+        plt.tight_layout()
+        
+        # Create visualizations directory if it doesn't exist
+        os.makedirs('Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP', exist_ok=True)
+        save_path = os.path.join('Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP', "performance_comparison.png")
+        plt.savefig(save_path)
+        print(f"Summary comparison visualization saved as: {save_path}")
+        plt.close()
+        
+        # Create a more detailed visualization showing layer-by-layer performance
+        self.create_layer_performance_visualization()
+    
+    def create_layer_performance_visualization(self):
+        """Create visualization comparing performance across different layers."""
+        # Prepare data for visualization
+        layer_data = []
+        
+        for combination, results in self.results.items():
+            embedding_source, label_col = combination.split('|')
+            for i, accuracy in enumerate(results.get('accuracy', [])):
+                auc = results.get('auc', [])[i]
+                layer_data.append({
+                    'Combination': f"{embedding_source} + {label_col}",
+                    'Layer': f"Layer {i+1}",
+                    'Accuracy': accuracy,
+                    'AUC': auc
+                })
+        
+        # Skip if no data is available
+        if not layer_data:
+            return
+        
+        # Create DataFrame
+        df = pd.DataFrame(layer_data)
+        
+        # Create visualization
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 12), sharex=True)
+        
+        # Plot Accuracy by layer
+        sns.barplot(x='Combination', y='Accuracy', hue='Layer', data=df, ax=ax1)
+        ax1.set_title('Accuracy by Model Combination and Layer')
+        ax1.set_ylabel('Accuracy')
+        ax1.set_ylim(0, 1.0)
+        
+        # Plot AUC by layer
+        sns.barplot(x='Combination', y='AUC', hue='Layer', data=df, ax=ax2)
+        ax2.set_title('AUC by Model Combination and Layer')
+        ax2.set_ylabel('AUC')
+        ax2.set_ylim(0, 1.0)
+        
+        # Adjust layout
+        plt.tight_layout()
+        plt.xticks(rotation=0)
+        
+        # Save the visualization
+        save_path = os.path.join('Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP', "layer_performance_comparison.png")
+        plt.savefig(save_path)
+        print(f"Layer performance visualization saved as: {save_path}")
+        plt.close()
+
+
+# Main execution
+if __name__ == "__main__":
+    # Ensure all visualization directories exist
+    for directory in ['Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP', 'Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP', 'Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP']:
+        os.makedirs(directory, exist_ok=True)
+    
+    # Path to your dataset with OpenAI embeddings
+    dataset_path = '/home/c.c24004260/Climate_news_second_database/us_news_semantics_COP_completed_openai.csv'
+    
+    # Create predictor and run analysis
+    predictor = EmbeddingStockPredictor(dataset_path)
+    predictor.load_data().define_time_windows().run_all_combinations()
