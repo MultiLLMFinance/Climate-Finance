@@ -1,0 +1,1370 @@
+Automatic date parsing failed. Trying manual conversion...
+Processing title embedding vectors...
+Title embedding dimension: 1536
+Processing full text embedding vectors...
+Full text embedding dimension: 1536
+Loaded 929 news articles spanning from 02/01/2019 to 07/05/2023
+Class distribution for short-term prediction: {0: 469, 1: 460}
+Class distribution for long-term prediction: {1: 504, 0: 425}
+
+================================================================================
+Training XGBoost model for Title embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4848
+Test AUC for Layer 1: 0.5296
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4630
+Test AUC for Layer 2: 0.4321
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4928
+Test AUC for Layer 3: 0.4941
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4802
+Average Test AUC across all layers: 0.4852
+
+================================================================================
+Training XGBoost model for Title embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.1667
+Test AUC for Layer 1: 0.4182
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 1.0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 2: 0.6481
+Test AUC for Layer 2: 0.3741
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 5.0}
+Test Accuracy for Layer 3: 0.4348
+Test AUC for Layer 3: 0.4803
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/COP/learning_curves_Title_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4165
+Average Test AUC across all layers: 0.4242
+
+================================================================================
+Training XGBoost model for Full_text embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4697
+Test AUC for Layer 1: 0.3824
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4630
+Test AUC for Layer 2: 0.4778
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5217
+Test AUC for Layer 3: 0.4508
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4848
+Average Test AUC across all layers: 0.4370
+
+================================================================================
+Training XGBoost model for Full_text embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5152
+Test AUC for Layer 1: 0.7140
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4815
+Test AUC for Layer 2: 0.4820
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4928
+Test AUC for Layer 3: 0.5026
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/COP/learning_curves_Full_text_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4965
+Average Test AUC across all layers: 0.5662
+
+================================================================================
+SUMMARY OF RESULTS (COP)
+================================================================================
+
+Combination: Title embeddings + S_label
+Average Accuracy: 0.4802
+Average AUC: 0.4852
+  Layer 1 - Accuracy: 0.4848, AUC: 0.5296
+  Layer 2 - Accuracy: 0.4630, AUC: 0.4321
+  Layer 3 - Accuracy: 0.4928, AUC: 0.4941
+
+Combination: Title embeddings + L_label
+Average Accuracy: 0.4165
+Average AUC: 0.4242
+  Layer 1 - Accuracy: 0.1667, AUC: 0.4182
+  Layer 2 - Accuracy: 0.6481, AUC: 0.3741
+  Layer 3 - Accuracy: 0.4348, AUC: 0.4803
+
+Combination: Full_text embeddings + S_label
+Average Accuracy: 0.4848
+Average AUC: 0.4370
+  Layer 1 - Accuracy: 0.4697, AUC: 0.3824
+  Layer 2 - Accuracy: 0.4630, AUC: 0.4778
+  Layer 3 - Accuracy: 0.5217, AUC: 0.4508
+
+Combination: Full_text embeddings + L_label
+Average Accuracy: 0.4965
+Average AUC: 0.5662
+  Layer 1 - Accuracy: 0.5152, AUC: 0.7140
+  Layer 2 - Accuracy: 0.4815, AUC: 0.4820
+  Layer 3 - Accuracy: 0.4928, AUC: 0.5026
+Summary comparison visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP/performance_comparison.png
+Layer performance visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/COP/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing title embedding vectors...
+Title embedding dimension: 1536
+Processing full text embedding vectors...
+Full text embedding dimension: 1536
+Loaded 929 news articles spanning from 02/01/2019 to 07/05/2023
+Class distribution for short-term prediction: {1: 499, 0: 430}
+Class distribution for long-term prediction: {1: 521, 0: 408}
+
+================================================================================
+Training XGBoost model for Title embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4242
+Test AUC for Layer 1: 0.3680
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 1.0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 2: 0.6019
+Test AUC for Layer 2: 0.4433
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4928
+Test AUC for Layer 3: 0.5735
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5063
+Average Test AUC across all layers: 0.4616
+
+================================================================================
+Training XGBoost model for Title embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.7879
+Test AUC for Layer 1: 0.4808
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5648
+Test AUC for Layer 2: 0.4846
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.2899
+Test AUC for Layer 3: 0.5095
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/CVX/learning_curves_Title_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5475
+Average Test AUC across all layers: 0.4916
+
+================================================================================
+Training XGBoost model for Full_text embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5000
+Test AUC for Layer 1: 0.4772
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5278
+Test AUC for Layer 2: 0.4504
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4638
+Test AUC for Layer 3: 0.6562
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4972
+Average Test AUC across all layers: 0.5280
+
+================================================================================
+Training XGBoost model for Full_text embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.7121
+Test AUC for Layer 1: 0.7486
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.6204
+Test AUC for Layer 2: 0.4989
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.3478
+Test AUC for Layer 3: 0.5263
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/CVX/learning_curves_Full_text_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5601
+Average Test AUC across all layers: 0.5913
+
+================================================================================
+SUMMARY OF RESULTS (CVX)
+================================================================================
+
+Combination: Title embeddings + S_label
+Average Accuracy: 0.5063
+Average AUC: 0.4616
+  Layer 1 - Accuracy: 0.4242, AUC: 0.3680
+  Layer 2 - Accuracy: 0.6019, AUC: 0.4433
+  Layer 3 - Accuracy: 0.4928, AUC: 0.5735
+
+Combination: Title embeddings + L_label
+Average Accuracy: 0.5475
+Average AUC: 0.4916
+  Layer 1 - Accuracy: 0.7879, AUC: 0.4808
+  Layer 2 - Accuracy: 0.5648, AUC: 0.4846
+  Layer 3 - Accuracy: 0.2899, AUC: 0.5095
+
+Combination: Full_text embeddings + S_label
+Average Accuracy: 0.4972
+Average AUC: 0.5280
+  Layer 1 - Accuracy: 0.5000, AUC: 0.4772
+  Layer 2 - Accuracy: 0.5278, AUC: 0.4504
+  Layer 3 - Accuracy: 0.4638, AUC: 0.6562
+
+Combination: Full_text embeddings + L_label
+Average Accuracy: 0.5601
+Average AUC: 0.5913
+  Layer 1 - Accuracy: 0.7121, AUC: 0.7486
+  Layer 2 - Accuracy: 0.6204, AUC: 0.4989
+  Layer 3 - Accuracy: 0.3478, AUC: 0.5263
+Summary comparison visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/CVX/performance_comparison.png
+Layer performance visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/CVX/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing title embedding vectors...
+Title embedding dimension: 1536
+Processing full text embedding vectors...
+Full text embedding dimension: 1536
+Loaded 929 news articles spanning from 02/01/2019 to 07/05/2023
+Class distribution for short-term prediction: {1: 482, 0: 447}
+Class distribution for long-term prediction: {1: 555, 0: 374}
+
+================================================================================
+Training XGBoost model for Title embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5000
+Test AUC for Layer 1: 0.3702
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4907
+Test AUC for Layer 2: 0.4741
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 5.0}
+Test Accuracy for Layer 3: 0.4348
+Test AUC for Layer 3: 0.3975
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4752
+Average Test AUC across all layers: 0.4139
+
+================================================================================
+Training XGBoost model for Title embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.7424
+Test AUC for Layer 1: 0.5496
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 1.0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 2: 0.7315
+Test AUC for Layer 2: 0.5120
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 3: 0.5217
+Test AUC for Layer 3: 0.4865
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/MPC/learning_curves_Title_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.6652
+Average Test AUC across all layers: 0.5161
+
+================================================================================
+Training XGBoost model for Full_text embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4545
+Test AUC for Layer 1: 0.4529
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 10.0}
+Test Accuracy for Layer 2: 0.4537
+Test AUC for Layer 2: 0.4109
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4493
+Test AUC for Layer 3: 0.5050
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4525
+Average Test AUC across all layers: 0.4563
+
+================================================================================
+Training XGBoost model for Full_text embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.6515
+Test AUC for Layer 1: 0.4722
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.7315
+Test AUC for Layer 2: 0.6975
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5217
+Test AUC for Layer 3: 0.4891
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/MPC/learning_curves_Full_text_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.6349
+Average Test AUC across all layers: 0.5529
+
+================================================================================
+SUMMARY OF RESULTS (MPC)
+================================================================================
+
+Combination: Title embeddings + S_label
+Average Accuracy: 0.4752
+Average AUC: 0.4139
+  Layer 1 - Accuracy: 0.5000, AUC: 0.3702
+  Layer 2 - Accuracy: 0.4907, AUC: 0.4741
+  Layer 3 - Accuracy: 0.4348, AUC: 0.3975
+
+Combination: Title embeddings + L_label
+Average Accuracy: 0.6652
+Average AUC: 0.5161
+  Layer 1 - Accuracy: 0.7424, AUC: 0.5496
+  Layer 2 - Accuracy: 0.7315, AUC: 0.5120
+  Layer 3 - Accuracy: 0.5217, AUC: 0.4865
+
+Combination: Full_text embeddings + S_label
+Average Accuracy: 0.4525
+Average AUC: 0.4563
+  Layer 1 - Accuracy: 0.4545, AUC: 0.4529
+  Layer 2 - Accuracy: 0.4537, AUC: 0.4109
+  Layer 3 - Accuracy: 0.4493, AUC: 0.5050
+
+Combination: Full_text embeddings + L_label
+Average Accuracy: 0.6349
+Average AUC: 0.5529
+  Layer 1 - Accuracy: 0.6515, AUC: 0.4722
+  Layer 2 - Accuracy: 0.7315, AUC: 0.6975
+  Layer 3 - Accuracy: 0.5217, AUC: 0.4891
+Summary comparison visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/MPC/performance_comparison.png
+Layer performance visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/MPC/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing title embedding vectors...
+Title embedding dimension: 1536
+Processing full text embedding vectors...
+Full text embedding dimension: 1536
+Loaded 929 news articles spanning from 02/01/2019 to 07/05/2023
+Class distribution for short-term prediction: {1: 472, 0: 457}
+Class distribution for long-term prediction: {1: 494, 0: 435}
+
+================================================================================
+Training XGBoost model for Title embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5152
+Test AUC for Layer 1: 0.4292
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4444
+Test AUC for Layer 2: 0.4607
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 10.0}
+Test Accuracy for Layer 3: 0.4638
+Test AUC for Layer 3: 0.4427
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4745
+Average Test AUC across all layers: 0.4442
+
+================================================================================
+Training XGBoost model for Title embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.6515
+Test AUC for Layer 1: 0.6127
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.6296
+Test AUC for Layer 2: 0.4549
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4058
+Test AUC for Layer 3: 0.4516
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/SLB/learning_curves_Title_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5623
+Average Test AUC across all layers: 0.5064
+
+================================================================================
+Training XGBoost model for Full_text embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5152
+Test AUC for Layer 1: 0.4853
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4167
+Test AUC for Layer 2: 0.4022
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 1.0, 'reg_lambda': 5.0}
+Test Accuracy for Layer 3: 0.5797
+Test AUC for Layer 3: 0.6026
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5038
+Average Test AUC across all layers: 0.4967
+
+================================================================================
+Training XGBoost model for Full_text embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.6515
+Test AUC for Layer 1: 0.6866
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5185
+Test AUC for Layer 2: 0.4761
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.3913
+Test AUC for Layer 3: 0.4671
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/SLB/learning_curves_Full_text_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5204
+Average Test AUC across all layers: 0.5433
+
+================================================================================
+SUMMARY OF RESULTS (SLB)
+================================================================================
+
+Combination: Title embeddings + S_label
+Average Accuracy: 0.4745
+Average AUC: 0.4442
+  Layer 1 - Accuracy: 0.5152, AUC: 0.4292
+  Layer 2 - Accuracy: 0.4444, AUC: 0.4607
+  Layer 3 - Accuracy: 0.4638, AUC: 0.4427
+
+Combination: Title embeddings + L_label
+Average Accuracy: 0.5623
+Average AUC: 0.5064
+  Layer 1 - Accuracy: 0.6515, AUC: 0.6127
+  Layer 2 - Accuracy: 0.6296, AUC: 0.4549
+  Layer 3 - Accuracy: 0.4058, AUC: 0.4516
+
+Combination: Full_text embeddings + S_label
+Average Accuracy: 0.5038
+Average AUC: 0.4967
+  Layer 1 - Accuracy: 0.5152, AUC: 0.4853
+  Layer 2 - Accuracy: 0.4167, AUC: 0.4022
+  Layer 3 - Accuracy: 0.5797, AUC: 0.6026
+
+Combination: Full_text embeddings + L_label
+Average Accuracy: 0.5204
+Average AUC: 0.5433
+  Layer 1 - Accuracy: 0.6515, AUC: 0.6866
+  Layer 2 - Accuracy: 0.5185, AUC: 0.4761
+  Layer 3 - Accuracy: 0.3913, AUC: 0.4671
+Summary comparison visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/SLB/performance_comparison.png
+Layer performance visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/SLB/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing title embedding vectors...
+Title embedding dimension: 1536
+Processing full text embedding vectors...
+Full text embedding dimension: 1536
+Loaded 929 news articles spanning from 02/01/2019 to 07/05/2023
+Class distribution for short-term prediction: {0: 466, 1: 463}
+Class distribution for long-term prediction: {1: 507, 0: 422}
+
+================================================================================
+Training XGBoost model for Title embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.3788
+Test AUC for Layer 1: 0.4888
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4630
+Test AUC for Layer 2: 0.4775
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5072
+Test AUC for Layer 3: 0.5202
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4497
+Average Test AUC across all layers: 0.4955
+
+================================================================================
+Training XGBoost model for Title embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 5.0}
+Test Accuracy for Layer 1: 0.6667
+Test AUC for Layer 1: 0.5088
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.6667
+Test AUC for Layer 2: 0.5772
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Title embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Title embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.3913
+Test AUC for Layer 3: 0.6296
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_title/XOM/learning_curves_Title_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5749
+Average Test AUC across all layers: 0.5719
+
+================================================================================
+Training XGBoost model for Full_text embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4394
+Test AUC for Layer 1: 0.5151
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4537
+Test AUC for Layer 2: 0.4510
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 5.0}
+Test Accuracy for Layer 3: 0.4928
+Test AUC for Layer 3: 0.5361
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4620
+Average Test AUC across all layers: 0.5008
+
+================================================================================
+Training XGBoost model for Full_text embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/01/2019 - 31/05/2021
+Validation period: 01/06/2021 - 31/12/2021
+Testing period: 01/01/2022 - 31/05/2022
+Training data: 522 samples
+Validation data: 163 samples
+Test data: 66 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.8636
+Test AUC for Layer 1: 0.6004
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/01/2019 - 31/12/2021
+Validation period: 01/01/2022 - 31/05/2022
+Testing period: 01/06/2022 - 31/12/2022
+Training data: 685 samples
+Validation data: 66 samples
+Test data: 108 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5185
+Test AUC for Layer 2: 0.5502
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/01/2019 - 31/05/2022
+Validation period: 01/06/2022 - 31/12/2022
+Testing period: 01/01/2023 - 31/05/2023
+Training data: 751 samples
+Validation data: 108 samples
+Test data: 69 samples
+Stage 1: Tuning core parameters for Full_text embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Full_text embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 3: 0.4203
+Test AUC for Layer 3: 0.5406
+Learning curves visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_full_text/XOM/learning_curves_Full_text_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.6008
+Average Test AUC across all layers: 0.5637
+
+================================================================================
+SUMMARY OF RESULTS (XOM)
+================================================================================
+
+Combination: Title embeddings + S_label
+Average Accuracy: 0.4497
+Average AUC: 0.4955
+  Layer 1 - Accuracy: 0.3788, AUC: 0.4888
+  Layer 2 - Accuracy: 0.4630, AUC: 0.4775
+  Layer 3 - Accuracy: 0.5072, AUC: 0.5202
+
+Combination: Title embeddings + L_label
+Average Accuracy: 0.5749
+Average AUC: 0.5719
+  Layer 1 - Accuracy: 0.6667, AUC: 0.5088
+  Layer 2 - Accuracy: 0.6667, AUC: 0.5772
+  Layer 3 - Accuracy: 0.3913, AUC: 0.6296
+
+Combination: Full_text embeddings + S_label
+Average Accuracy: 0.4620
+Average AUC: 0.5008
+  Layer 1 - Accuracy: 0.4394, AUC: 0.5151
+  Layer 2 - Accuracy: 0.4537, AUC: 0.4510
+  Layer 3 - Accuracy: 0.4928, AUC: 0.5361
+
+Combination: Full_text embeddings + L_label
+Average Accuracy: 0.6008
+Average AUC: 0.5637
+  Layer 1 - Accuracy: 0.8636, AUC: 0.6004
+  Layer 2 - Accuracy: 0.5185, AUC: 0.5502
+  Layer 3 - Accuracy: 0.4203, AUC: 0.5406
+Summary comparison visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/XOM/performance_comparison.png
+Layer performance visualization saved as: Climate_news_second_database/OpenAI_XGBoost/visualizations_summary/XOM/layer_performance_comparison.png
