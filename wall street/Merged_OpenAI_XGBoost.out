@@ -1,0 +1,710 @@
+Automatic date parsing failed. Trying manual conversion...
+Processing merged embedding vectors...
+Merged embedding dimension: 1536
+Loaded 838 news articles spanning from 07/11/2014 to 24/09/2024
+Class distribution for short-term prediction: {0: 431, 1: 407}
+Class distribution for long-term prediction: {1: 440, 0: 398}
+
+================================================================================
+Training XGBoost model for Merged embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4887
+Test AUC for Layer 1: 0.5298
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4257
+Test AUC for Layer 2: 0.4440
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4857
+Test AUC for Layer 3: 0.4209
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4667
+Average Test AUC across all layers: 0.4649
+
+================================================================================
+Training XGBoost model for Merged embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.2782
+Test AUC for Layer 1: 0.5090
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5050
+Test AUC for Layer 2: 0.4824
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4571
+Test AUC for Layer 3: 0.5194
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/COP/learning_curves_Merged_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4134
+Average Test AUC across all layers: 0.5036
+
+================================================================================
+SUMMARY OF RESULTS (COP)
+================================================================================
+
+Combination: Merged embeddings + S_label
+Average Accuracy: 0.4667
+Average AUC: 0.4649
+  Layer 1 - Accuracy: 0.4887, AUC: 0.5298
+  Layer 2 - Accuracy: 0.4257, AUC: 0.4440
+  Layer 3 - Accuracy: 0.4857, AUC: 0.4209
+
+Combination: Merged embeddings + L_label
+Average Accuracy: 0.4134
+Average AUC: 0.5036
+  Layer 1 - Accuracy: 0.2782, AUC: 0.5090
+  Layer 2 - Accuracy: 0.5050, AUC: 0.4824
+  Layer 3 - Accuracy: 0.4571, AUC: 0.5194
+Summary comparison visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/COP/performance_comparison.png
+Layer performance visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/COP/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing merged embedding vectors...
+Merged embedding dimension: 1536
+Loaded 838 news articles spanning from 07/11/2014 to 24/09/2024
+Class distribution for short-term prediction: {1: 452, 0: 386}
+Class distribution for long-term prediction: {1: 464, 0: 374}
+
+================================================================================
+Training XGBoost model for Merged embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.6090
+Test AUC for Layer 1: 0.4486
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5347
+Test AUC for Layer 2: 0.5000
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 3: 0.5286
+Test AUC for Layer 3: 0.5180
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5574
+Average Test AUC across all layers: 0.4889
+
+================================================================================
+Training XGBoost model for Merged embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.2632
+Test AUC for Layer 1: 0.4676
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.3960
+Test AUC for Layer 2: 0.3850
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5143
+Test AUC for Layer 3: 0.4971
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/CVX/learning_curves_Merged_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.3912
+Average Test AUC across all layers: 0.4499
+
+================================================================================
+SUMMARY OF RESULTS (CVX)
+================================================================================
+
+Combination: Merged embeddings + S_label
+Average Accuracy: 0.5574
+Average AUC: 0.4889
+  Layer 1 - Accuracy: 0.6090, AUC: 0.4486
+  Layer 2 - Accuracy: 0.5347, AUC: 0.5000
+  Layer 3 - Accuracy: 0.5286, AUC: 0.5180
+
+Combination: Merged embeddings + L_label
+Average Accuracy: 0.3912
+Average AUC: 0.4499
+  Layer 1 - Accuracy: 0.2632, AUC: 0.4676
+  Layer 2 - Accuracy: 0.3960, AUC: 0.3850
+  Layer 3 - Accuracy: 0.5143, AUC: 0.4971
+Summary comparison visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/CVX/performance_comparison.png
+Layer performance visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/CVX/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing merged embedding vectors...
+Merged embedding dimension: 1536
+Loaded 838 news articles spanning from 07/11/2014 to 24/09/2024
+Class distribution for short-term prediction: {1: 460, 0: 378}
+Class distribution for long-term prediction: {1: 503, 0: 335}
+
+================================================================================
+Training XGBoost model for Merged embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 1.0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.5338
+Test AUC for Layer 1: 0.4890
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5842
+Test AUC for Layer 2: 0.6119
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5714
+Test AUC for Layer 3: 0.5250
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5631
+Average Test AUC across all layers: 0.5420
+
+================================================================================
+Training XGBoost model for Merged embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.6015
+Test AUC for Layer 1: 0.5706
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.6436
+Test AUC for Layer 2: 0.7254
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4857
+Test AUC for Layer 3: 0.4150
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/MPC/learning_curves_Merged_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.5769
+Average Test AUC across all layers: 0.5703
+
+================================================================================
+SUMMARY OF RESULTS (MPC)
+================================================================================
+
+Combination: Merged embeddings + S_label
+Average Accuracy: 0.5631
+Average AUC: 0.5420
+  Layer 1 - Accuracy: 0.5338, AUC: 0.4890
+  Layer 2 - Accuracy: 0.5842, AUC: 0.6119
+  Layer 3 - Accuracy: 0.5714, AUC: 0.5250
+
+Combination: Merged embeddings + L_label
+Average Accuracy: 0.5769
+Average AUC: 0.5703
+  Layer 1 - Accuracy: 0.6015, AUC: 0.5706
+  Layer 2 - Accuracy: 0.6436, AUC: 0.7254
+  Layer 3 - Accuracy: 0.4857, AUC: 0.4150
+Summary comparison visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/MPC/performance_comparison.png
+Layer performance visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/MPC/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing merged embedding vectors...
+Merged embedding dimension: 1536
+Loaded 838 news articles spanning from 07/11/2014 to 24/09/2024
+Class distribution for short-term prediction: {0: 433, 1: 405}
+Class distribution for long-term prediction: {0: 437, 1: 401}
+
+================================================================================
+Training XGBoost model for Merged embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 1: 0.5338
+Test AUC for Layer 1: 0.5665
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.4257
+Test AUC for Layer 2: 0.4066
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4714
+Test AUC for Layer 3: 0.4119
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4770
+Average Test AUC across all layers: 0.4617
+
+================================================================================
+Training XGBoost model for Merged embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.3684
+Test AUC for Layer 1: 0.5807
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5149
+Test AUC for Layer 2: 0.4855
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 150, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.6000
+Test AUC for Layer 3: 0.5208
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/SLB/learning_curves_Merged_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4944
+Average Test AUC across all layers: 0.5290
+
+================================================================================
+SUMMARY OF RESULTS (SLB)
+================================================================================
+
+Combination: Merged embeddings + S_label
+Average Accuracy: 0.4770
+Average AUC: 0.4617
+  Layer 1 - Accuracy: 0.5338, AUC: 0.5665
+  Layer 2 - Accuracy: 0.4257, AUC: 0.4066
+  Layer 3 - Accuracy: 0.4714, AUC: 0.4119
+
+Combination: Merged embeddings + L_label
+Average Accuracy: 0.4944
+Average AUC: 0.5290
+  Layer 1 - Accuracy: 0.3684, AUC: 0.5807
+  Layer 2 - Accuracy: 0.5149, AUC: 0.4855
+  Layer 3 - Accuracy: 0.6000, AUC: 0.5208
+Summary comparison visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/SLB/performance_comparison.png
+Layer performance visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/SLB/layer_performance_comparison.png
+Automatic date parsing failed. Trying manual conversion...
+Processing merged embedding vectors...
+Merged embedding dimension: 1536
+Loaded 838 news articles spanning from 07/11/2014 to 24/09/2024
+Class distribution for short-term prediction: {1: 427, 0: 411}
+Class distribution for long-term prediction: {1: 428, 0: 410}
+
+================================================================================
+Training XGBoost model for Merged embeddings and S_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.4812
+Test AUC for Layer 1: 0.5169
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_S_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.01, 'max_depth': 5, 'min_child_weight': 1, 'n_estimators': 150, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 2: 0.5545
+Test AUC for Layer 2: 0.5213
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_S_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 5, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.4429
+Test AUC for Layer 3: 0.5476
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_S_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4928
+Average Test AUC across all layers: 0.5286
+
+================================================================================
+Training XGBoost model for Merged embeddings and L_label
+================================================================================
+
+Layer 1:
+Training period: 01/11/2014 - 31/10/2020
+Validation period: 01/11/2020 - 31/10/2021
+Testing period: 01/11/2021 - 31/10/2022
+Training data: 401 samples
+Validation data: 131 samples
+Test data: 133 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.7}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0, 'reg_lambda': 1.0}
+Test Accuracy for Layer 1: 0.2707
+Test AUC for Layer 1: 0.5441
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_L_label_layer_1.png
+
+Layer 2:
+Training period: 01/11/2014 - 31/10/2021
+Validation period: 01/11/2021 - 31/10/2022
+Testing period: 01/11/2022 - 31/10/2023
+Training data: 532 samples
+Validation data: 133 samples
+Test data: 101 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.1, 'reg_alpha': 0, 'reg_lambda': 10.0}
+Test Accuracy for Layer 2: 0.5842
+Test AUC for Layer 2: 0.4879
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_L_label_layer_2.png
+
+Layer 3:
+Training period: 01/11/2014 - 31/10/2022
+Validation period: 01/11/2022 - 31/10/2023
+Testing period: 01/11/2023 - 01/11/2024
+Training data: 666 samples
+Validation data: 101 samples
+Test data: 70 samples
+Stage 1: Tuning core parameters for Merged embeddings...
+Fitting 3 folds for each of 96 candidates, totalling 288 fits
+Best parameters from Stage 1: {'colsample_bytree': 0.8, 'learning_rate': 0.0001, 'max_depth': 3, 'min_child_weight': 3, 'n_estimators': 80, 'subsample': 0.8}
+Stage 2: Fine-tuning regularization parameters for Merged embeddings...
+Fitting 3 folds for each of 27 candidates, totalling 81 fits
+Best parameters from Stage 2: {'gamma': 0.3, 'reg_alpha': 0.1, 'reg_lambda': 1.0}
+Test Accuracy for Layer 3: 0.5000
+Test AUC for Layer 3: 0.5861
+Learning curves visualization saved as: Merged_OpenAI_XGBoost/visualizations/XOM/learning_curves_Merged_L_label_layer_3.png
+
+Average Test Accuracy across all layers: 0.4516
+Average Test AUC across all layers: 0.5394
+
+================================================================================
+SUMMARY OF RESULTS (XOM)
+================================================================================
+
+Combination: Merged embeddings + S_label
+Average Accuracy: 0.4928
+Average AUC: 0.5286
+  Layer 1 - Accuracy: 0.4812, AUC: 0.5169
+  Layer 2 - Accuracy: 0.5545, AUC: 0.5213
+  Layer 3 - Accuracy: 0.4429, AUC: 0.5476
+
+Combination: Merged embeddings + L_label
+Average Accuracy: 0.4516
+Average AUC: 0.5394
+  Layer 1 - Accuracy: 0.2707, AUC: 0.5441
+  Layer 2 - Accuracy: 0.5842, AUC: 0.4879
+  Layer 3 - Accuracy: 0.5000, AUC: 0.5861
+Summary comparison visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/XOM/performance_comparison.png
+Layer performance visualization saved as: Merged_OpenAI_XGBoost/visualizations_summary/XOM/layer_performance_comparison.png
