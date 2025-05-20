@@ -6,4 +6,4 @@ the original climate change news datasets saved in "databases" fold, further, wa
 the combinations training codes saved in "code" fold.
 the results of combinations based on wall street journal saved in "wall_street" fold.
 the results of combinations based on another databased saved in "us_climate_news" fold.
-the project have been submitting to EMNLP2025.
+the project have been submitted to EMNLP2025.
